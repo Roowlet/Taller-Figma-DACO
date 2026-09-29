@@ -1,0 +1,22 @@
+/**
+ * LIGHT THEME - Tema claro para la aplicacion.
+ * Los colores del modo claro vienen de los tokens base generados desde Figma.
+ * Mantener este archivo sin overrides de color evita alterar headers, hovers y dropdowns.
+ */
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --sys-color-bg-status-flow-status-aceptado: var(--figma-light-sys-color-bg-feedback-dark-success);
+  --sys-color-bg-status-flow-status-anulado: var(--figma-light-sys-color-bg-feedback-dark-danger);
+  --sys-color-bg-status-flow-status-aprobado: var(--figma-light-sys-color-bg-feedback-dark-success);
+  --sys-color-bg-status-flow-status-autorizado: var(--figma-light-sys-color-bg-feedback-dark-success);
+  --sys-color-bg-status-flow-status-elaborado: var(--figma-light-sys-color-bg-feedback-dark-default);
+  --sys-color-bg-status-flow-status-eliminado: var(--figma-light-sys-color-bg-feedback-dark-danger);
+  --sys-color-bg-status-flow-status-firmado: var(--figma-light-sys-color-bg-feedback-dark-success);
+  --sys-color-bg-status-flow-status-observado: var(--figma-light-sys-color-bg-feedback-dark-warning);
+  --sys-color-bg-status-flow-status-rechazado: var(--figma-light-sys-color-bg-feedback-dark-danger);
+  --sys-color-bg-status-flow-status-revisado: var(--figma-light-sys-color-bg-feedback-dark-info);
+  --sys-color-bg-status-flow-status-validado: var(--figma-light-sys-color-bg-feedback-dark-info);
+  --sys-color-bg-status-flow-status-verificado: var(--figma-light-sys-color-bg-feedback-dark-info);
+}

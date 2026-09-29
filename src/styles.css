@@ -1,0 +1,429 @@
+@import "tailwindcss";
+@import "material-icons/iconfont/material-icons.css";
+@import "material-icons/iconfont/outlined.css";
+@import "./styles/tokens/index.css";
+@import "./styles/tokens/figma.css";
+@import "./styles/tokens/generated/tailwind.tokens.css";
+@import "./styles/tokens/themes/index.css";
+
+@theme {
+  --font-sans: var(--sys-typography-font-family-base);
+
+  --color-brand-primary: var(--sys-color-bg-brand-primary);
+  --color-brand-secondary: var(--sys-color-bg-brand-secondary);
+  --color-brand-contrast: var(--sys-color-text-brand-white);
+  --color-accent: var(--sys-color-bg-brand-accent);
+  --color-surface: var(--sys-color-bg-surfaces-surface);
+  --color-surface-muted: var(--sys-color-bg-surfaces-surface-high);
+  --color-border: var(--sys-color-border-states-enabled);
+  --color-text: var(--sys-color-text-neutral-high);
+  --color-text-muted: var(--sys-color-text-neutral-low);
+
+  --radius-siaf-sm: var(--sys-radius-sm);
+  --radius-siaf-md: var(--sys-radius-md);
+  --radius-siaf-lg: var(--sys-radius-lg);
+  --radius-siaf-full: var(--sys-radius-full);
+
+  --spacing-siaf-none: var(--sys-gap-base-none);
+  --spacing-siaf-xxs: var(--sys-gap-base-xxs);
+  --spacing-siaf-xs: var(--sys-gap-base-xs);
+  --spacing-siaf-sm: var(--sys-gap-base-sm);
+  --spacing-siaf-md: var(--sys-gap-base-md);
+  --spacing-siaf-lg: var(--sys-gap-base-lg);
+  --spacing-siaf-xl: var(--sys-gap-base-xl);
+  --spacing-siaf-xxl: var(--sys-gap-base-xxl);
+
+}
+
+:root {
+  --sys-gap-base-none: var(--figma-device-sys-gap-base-none);
+  --sys-gap-base-xxs: var(--figma-device-sys-gap-base-xxs);
+  --sys-gap-base-xs: var(--figma-device-sys-gap-base-xs);
+  --sys-gap-base-sm: var(--figma-device-sys-gap-base-sm);
+  --sys-gap-base-md: var(--figma-device-sys-gap-base-md);
+  --sys-gap-base-lg: var(--figma-device-sys-gap-base-lg);
+  --sys-gap-base-xl: var(--figma-device-sys-gap-base-xl);
+  --sys-gap-base-xxl: var(--figma-device-sys-gap-base-xxl);
+
+  --sys-space-1: var(--sys-gap-base-xxs);
+  --sys-space-2: var(--sys-gap-base-xs);
+  --sys-space-3: var(--sys-gap-base-sm);
+  --sys-space-4: var(--sys-gap-base-md);
+  --sys-space-5: 20px;
+  --sys-space-6: var(--sys-gap-base-lg);
+  --sys-space-8: var(--sys-gap-base-xl);
+  --sys-padding-base-none: var(--figma-device-sys-padding-base-none);
+  --sys-padding-base-xxs: var(--figma-device-sys-padding-base-xxs);
+  --sys-padding-base-xs: var(--figma-device-sys-padding-base-xs);
+  --sys-padding-base-sm: var(--figma-device-sys-padding-base-sm);
+  --sys-padding-base-md: var(--figma-device-sys-padding-base-md);
+  --sys-padding-base-lg: var(--figma-device-sys-padding-base-lg);
+  --sys-padding-base-xl: var(--figma-device-sys-padding-base-xl);
+  --sys-padding-base-xxl: var(--figma-device-sys-padding-base-xxl);
+
+  --ref-color-solid-primary-50: var(--color-palette-blue-50);
+
+  --sys-radius-sm: var(--figma-device-sys-border-radius-small);
+  --sys-radius-md: var(--figma-device-sys-border-radius-medium);
+  --sys-radius-lg: var(--figma-device-sys-border-radius-large);
+  --sys-radius-full: var(--figma-device-sys-border-radius-full);
+  --sys-border-linear-thin: var(--figma-device-sys-border-linear-thin);
+  --sys-border-linear-medium: var(--figma-device-sys-border-linear-medium);
+  --sys-border-radius-medium: var(--sys-radius-md);
+
+  --sys-typography-font-family-base: var(--figma-device-sys-typography-font-family-base), ui-sans-serif, system-ui, sans-serif;
+  --sys-typography-weight-light: var(--figma-device-sys-typography-weight-light);
+  --sys-typography-weight-regular: var(--figma-device-sys-typography-weight-regular);
+  --sys-typography-weight-medium: var(--figma-device-sys-typography-weight-medium);
+  --sys-typography-weight-semibold: 600;
+  --sys-typography-weight-bold: var(--figma-device-sys-typography-weight-bold);
+  --sys-typography-size-heading-1: var(--figma-device-sys-typography-size-heading-1);
+  --sys-typography-size-heading-2: var(--figma-device-sys-typography-size-heading-2);
+  --sys-typography-size-heading-3: var(--figma-device-sys-typography-size-heading-3);
+  --sys-typography-size-heading-4: var(--figma-device-sys-typography-size-heading-4);
+  --sys-typography-size-heading-5: var(--figma-device-sys-typography-size-heading-5);
+  --sys-typography-size-heading-6: var(--figma-device-sys-typography-size-heading-6);
+  --sys-typography-size-subtitle-1: var(--figma-device-sys-typography-size-subtitle-1);
+  --sys-typography-size-subtitle-2: var(--figma-device-sys-typography-size-subtitle-2);
+  --sys-typography-size-body: var(--figma-device-sys-typography-size-body-2);
+  --sys-typography-size-body-1: var(--figma-device-sys-typography-size-body-1);
+  --sys-typography-size-body-2: var(--figma-device-sys-typography-size-body-2);
+  --sys-typography-size-button-1: var(--figma-device-sys-typography-size-button-1);
+  --sys-typography-size-button-2: var(--figma-device-sys-typography-size-button-2);
+  --sys-typography-size-caption-1: var(--figma-device-sys-typography-size-caption-1);
+  --sys-typography-size-caption-2: var(--figma-device-sys-typography-size-caption-2);
+  --sys-typography-size-overline-1: var(--figma-device-sys-typography-size-overline-1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--sys-color-bg-surfaces-surface);
+  color: var(--sys-color-text-neutral-high);
+  font-family: var(--sys-typography-font-family-base);
+  font-size: var(--sys-typography-size-body);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+::view-transition-old(root) {
+  z-index: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  border: 2px solid var(--sys-color-icon-states-enabled);
+  border-radius: 2px;
+  background-color: var(--sys-color-bg-surfaces-surface);
+  accent-color: var(--sys-color-icon-states-enabled);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.625rem;
+  height: 0.625rem;
+  transform: scale(0);
+  background-color: var(--sys-color-text-brand-white);
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 25%, 86% 10%, 37% 68%);
+}
+
+input[type="checkbox"]:checked {
+  border-color: var(--sys-color-icon-states-active);
+  background-color: var(--sys-color-icon-states-active);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:indeterminate {
+  border-color: var(--sys-color-icon-states-active);
+  background-color: var(--sys-color-icon-states-active);
+}
+
+input[type="checkbox"]:indeterminate::before {
+  width: 0.625rem;
+  height: 0.125rem;
+  transform: scale(1);
+  background-color: var(--sys-color-text-brand-white);
+  clip-path: none;
+}
+
+input[type="checkbox"]:disabled {
+  border-color: var(--sys-color-icon-states-disabled);
+  accent-color: var(--sys-color-icon-states-disabled);
+}
+
+input[type="checkbox"]:disabled:checked {
+  background-color: var(--sys-color-icon-states-disabled);
+}
+
+@layer components {
+  .siaf-table-shell {
+    max-width: 100%;
+    max-height: 480px;
+    overflow: auto;
+    border-radius: var(--sys-radius-md);
+    background-color: var(--sys-color-bg-surfaces-surface);
+  }
+
+  .siaf-table-scroll {
+    max-width: 100%;
+    max-height: 480px;
+    overflow: auto;
+  }
+
+  .siaf-sidepanel-table-scroll {
+    max-width: 100%;
+    max-height: none;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .siaf-table-shell thead,
+  .siaf-table-scroll thead,
+  .siaf-sidepanel-table-scroll thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-bottom: var(--sys-border-linear-thin) solid var(--sys-color-divider-strong);
+    background-image: linear-gradient(90deg, var(--sys-color-bg-surfaces-surface-high) 0%, var(--sys-color-bg-surfaces-surface-high) 100%), linear-gradient(90deg, var(--sys-color-bg-surfaces-surface) 0%, var(--sys-color-bg-surfaces-surface) 100%);
+  }
+
+  .siaf-table-shell th,
+  .siaf-table-scroll th,
+  .siaf-sidepanel-table-scroll th {
+    border-bottom: var(--sys-border-linear-thin) solid var(--sys-color-divider-strong);
+    background-image: linear-gradient(90deg, var(--sys-color-bg-surfaces-surface-high) 0%, var(--sys-color-bg-surfaces-surface-high) 100%), linear-gradient(90deg, var(--sys-color-bg-surfaces-surface) 0%, var(--sys-color-bg-surfaces-surface) 100%);
+  }
+
+  @media (max-width: 767px) {
+    .siaf-table-shell,
+    .siaf-table-scroll {
+      max-width: 100%;
+      max-height: 320px;
+      overflow: auto;
+    }
+
+    .siaf-sidepanel-table-scroll {
+      max-width: 100%;
+      max-height: none;
+      height: 100%;
+      overflow: auto;
+    }
+  }
+
+  .siaf-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: var(--sys-typography-size-body-2);
+  }
+
+  .siaf-table-head-row {
+    border-bottom: var(--sys-border-linear-thin) solid var(--sys-color-divider-strong);
+    background-image: linear-gradient(90deg, var(--sys-color-bg-surfaces-surface-high) 0%, var(--sys-color-bg-surfaces-surface-high) 100%), linear-gradient(90deg, var(--sys-color-bg-surfaces-surface) 0%, var(--sys-color-bg-surfaces-surface) 100%);
+    color: var(--sys-color-text-neutral-high);
+  }
+
+  .siaf-table-th {
+    height: 2.5rem;
+    padding: var(--sys-padding-base-sm) var(--sys-padding-base-md);
+    font-size: var(--sys-typography-size-caption-1);
+    font-weight: var(--sys-typography-weight-bold);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .siaf-table-row {
+    border-bottom: var(--sys-border-linear-thin) solid var(--sys-color-divider-default);
+    background-color: var(--sys-color-bg-surfaces-surface);
+    transition: background-color 120ms ease;
+  }
+
+  .siaf-table-row:hover {
+    background-color: var(--sys-color-bg-states-light-hover);
+  }
+
+  .siaf-table-td {
+    min-height: 3rem;
+    padding: var(--sys-padding-base-sm) var(--sys-padding-base-md);
+    color: var(--sys-color-text-neutral-high);
+    font-size: var(--sys-typography-size-body-2);
+    line-height: normal;
+  }
+
+  .siaf-table-sticky-cell {
+    position: sticky;
+    right: 0;
+    border-left: var(--sys-border-linear-thin) solid var(--sys-color-divider-strong);
+    background-color: inherit;
+  }
+}
+
+.material-icons {
+  direction: ltr;
+  display: inline-block;
+  font-family: "Material Icons";
+  font-feature-settings: "liga";
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  overflow-wrap: normal;
+  text-transform: none;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Select nativo con estilo del sistema ── */
+.siaf-native-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 40px;
+  padding: 0 36px 0 12px;
+  border: 1px solid var(--sys-color-border-states-enabled);
+  border-radius: var(--sys-radius-md);
+  background-color: var(--sys-color-bg-surfaces-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  font-size: 14px;
+  color: var(--sys-color-text-neutral-high);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.siaf-native-select:hover {
+  border-color: var(--sys-color-border-states-hover);
+}
+
+.siaf-native-select:focus {
+  border: 2px solid var(--sys-color-border-states-active);
+}
+
+.siaf-native-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: var(--sys-color-bg-surfaces-disabled);
+}
+
+/* Opción placeholder sin valor */
+.siaf-native-select option[value=""] {
+  color: var(--sys-color-text-neutral-low);
+}
+
+.siaf-native-select--error {
+  border-color: var(--sys-color-border-feedback-danger);
+  color: var(--sys-color-text-neutral-low);
+}
+
+/* ── Animación de side panels (Figma WEB-SIAF-RP) ──
+   Abre: el panel entra deslizándose desde el borde derecho (ease-in 300ms).
+   Cierra: regresa saliendo por la derecha (ease-in-out 300ms).
+   El overlay oscuro hace fade con los mismos tiempos. La clase `cerrando`
+   la aplica SidePanelAnimacion mientras retiene el DOM del panel. */
+@keyframes siaf-sidepanel-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes siaf-sidepanel-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@keyframes siaf-overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes siaf-overlay-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.siaf-sidepanel-overlay {
+  animation: siaf-overlay-fade-in 300ms ease-in both;
+}
+.siaf-sidepanel-overlay > aside {
+  animation: siaf-sidepanel-in 300ms ease-in both;
+}
+.siaf-sidepanel-overlay.cerrando {
+  animation: siaf-overlay-fade-out 300ms ease-in-out both;
+}
+.siaf-sidepanel-overlay.cerrando > aside {
+  animation: siaf-sidepanel-out 300ms ease-in-out both;
+}
+
+/* ── Animación del snackbar (Figma WEB-SIAF-RP) ──
+   Entra deslizándose desde abajo (ease-out 300ms, delay 20ms) y al
+   cerrarlo con la X sale en reverso hacia abajo (ease-in 300ms). */
+@keyframes siaf-snackbar-in {
+  from { transform: translateY(calc(100% + 32px)); }
+  to { transform: translateY(0); }
+}
+@keyframes siaf-snackbar-out {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(100% + 32px)); }
+}
+
+.siaf-snackbar-anim {
+  animation: siaf-snackbar-in 300ms ease-out 20ms both;
+}
+.siaf-snackbar-anim.cerrando {
+  animation: siaf-snackbar-out 300ms ease-in both;
+}
+
+/* ── Animación de modales (Figma WEB-SIAF-RP) ──
+   Abre: el diálogo entra desde arriba hacia el centro (Move in ↓,
+   ease-out 300ms); el overlay hace fade. Cierra: el reverso hacia
+   arriba (ease-in-out 300ms). */
+@keyframes siaf-modal-in {
+  from { transform: translateY(calc(-50vh - 100%)); }
+  to { transform: translateY(0); }
+}
+@keyframes siaf-modal-out {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-50vh - 100%)); }
+}
+
+.siaf-modal-overlay {
+  animation: siaf-overlay-fade-in 300ms ease-out both;
+}
+.siaf-modal-overlay > section[role='dialog'] {
+  animation: siaf-modal-in 300ms ease-out both;
+}
+.siaf-modal-overlay.cerrando {
+  animation: siaf-overlay-fade-out 300ms ease-in-out both;
+}
+.siaf-modal-overlay.cerrando > section[role='dialog'] {
+  animation: siaf-modal-out 300ms ease-in-out both;
+}

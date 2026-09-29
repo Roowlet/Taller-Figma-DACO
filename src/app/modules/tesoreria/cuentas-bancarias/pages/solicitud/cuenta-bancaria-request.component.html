@@ -1,0 +1,188 @@
+<div class="min-h-[calc(100vh-56px)] bg-[var(--sys-color-bg-surfaces-surface-lowest)] text-text">
+  <!-- La cabecera (migas, título, estado y botones según rol y estado) la pinta el layout de solicitudes. -->
+  <siaf-solicitude-page-layout
+    [breadcrumbs]="breadcrumbs"
+    [role]="headerRole()"
+    [state]="headerState()"
+    [loading]="cargando()"
+    [heading]="heading"
+    secondaryText="Creación"
+    [showReturn]="true"
+    [saveDisabled]="!formValido() || saving()"
+    [verifyDisabled]="!puedeVerificar() || cargando()"
+    (returned)="regresar()"
+    (canceled)="regresar()"
+    (saved)="modalGrabar.set(true)"
+    (edited)="editar()"
+    (verified)="modalVerificar.set(true)"
+    (deleted)="modalEliminar.set(true)"
+    (approved)="abrirAprobar()"
+    (observed)="abrirObservar()"
+    (rejected)="abrirRechazar()"
+  >
+    @if (cargando()) {
+      <div class="rounded-siaf-md bg-surface p-siaf-xl">
+        <div class="grid grid-cols-3 gap-siaf-md">
+          @for (i of [1, 2, 3]; track i) {
+            <div class="siaf-skeleton-pulse h-4 w-32 rounded bg-[var(--sys-color-bg-surfaces-surface-low)]"></div>
+          }
+        </div>
+      </div>
+    } @else {
+      @if (elaborado()) {
+        <section class="grid gap-siaf-md lg:grid-cols-[1fr_360px]">
+          <siaf-solicitude-info-card [fields]="camposEntidad()" [captureOpenDate]="true" />
+          <siaf-document-summary-card [documentNumber]="numeroDocumento()" [status]="estadoDocumento()" />
+        </section>
+      } @else {
+        <siaf-solicitude-info-card [fields]="camposEntidad()" [captureOpenDate]="true" />
+      }
+
+      <!-- ── Datos de la cuenta bancaria ── -->
+      <siaf-solicitude-form-card title="Datos de la cuenta bancaria">
+        @if (soloLectura()) {
+          <div class="grid gap-x-siaf-xl gap-y-siaf-md md:grid-cols-2 xl:grid-cols-3">
+            @for (campo of lectura(); track campo.caption) {
+              <readonly-field [caption]="campo.caption" [value]="campo.value" />
+            }
+          </div>
+        } @else {
+          <div class="grid gap-x-siaf-xl gap-y-siaf-md md:grid-cols-2 xl:grid-cols-3">
+            <siaf-input
+              label="Banco"
+              type="select"
+              placeholder="Seleccione el banco"
+              [required]="true"
+              [options]="bancos"
+              [value]="form().bancoCodigo"
+              (valueChange)="actualizar('bancoCodigo', $any($event))"
+            />
+            <siaf-input
+              label="Moneda"
+              type="select"
+              placeholder="Seleccione la moneda"
+              [required]="true"
+              [options]="monedas"
+              [value]="form().moneda"
+              (valueChange)="actualizar('moneda', $any($event))"
+            />
+            <siaf-input
+              label="Número de cuenta"
+              placeholder="Solo dígitos"
+              [required]="true"
+              [value]="form().numeroCuenta"
+              [error]="errorNumeroCuenta()"
+              (valueChange)="actualizar('numeroCuenta', $any($event))"
+            />
+            <siaf-input
+              label="Denominación de la cuenta"
+              placeholder="Ej.: Recaudación de tasas"
+              [required]="true"
+              [value]="form().denominacion"
+              (valueChange)="actualizar('denominacion', $any($event))"
+            />
+            <siaf-date-time-picker
+              label="Fecha de apertura"
+              [required]="true"
+              [fullWidth]="true"
+              [defaultToToday]="false"
+              [value]="form().fechaApertura"
+              (valueChange)="actualizar('fechaApertura', $event)"
+            />
+            <div class="flex flex-col gap-siaf-md">
+              <siaf-radio-group
+                label="Tipo de cuenta"
+                name="tipo-cuenta"
+                [inline]="true"
+                [required]="true"
+                [options]="tiposCuenta"
+                [value]="form().tipoCuenta"
+                (valueChange)="actualizar('tipoCuenta', $any($event))"
+              />
+              <siaf-radio-group
+                label="¿Es cuenta recaudadora?"
+                name="es-recaudadora"
+                [inline]="true"
+                [required]="true"
+                [options]="opcionesSiNo"
+                [value]="form().esRecaudadora"
+                (valueChange)="actualizar('esRecaudadora', $any($event))"
+              />
+            </div>
+          </div>
+        }
+      </siaf-solicitude-form-card>
+
+      <!-- ── Justificación y sustento ── -->
+      <siaf-solicitude-form-card title="Justificación del sustento">
+        <text-area-control
+          placeholder="Justificación del requerimiento solicitado"
+          [required]="true"
+          [maxlength]="500"
+          [minlength]="minCaracteresTexto"
+          [disabled]="soloLectura()"
+          [value]="justificacion()"
+          (valueChange)="justificacion.set($event)"
+        />
+
+        <div class="flex flex-col gap-siaf-xs">
+          <div class="flex min-h-10 items-center justify-between gap-siaf-md">
+            <h3 class="m-0 text-sm font-bold uppercase text-text">Documento de sustento</h3>
+            @if (!soloLectura()) {
+              <siaf-button variant="accent" size="md" icon="file_upload" [iconOnly]="true" ariaLabel="Subir documento" (click)="panelSustentoAbierto.set(true)" />
+            }
+          </div>
+
+          @if (sustento()) {
+            <siaf-uploaded-file-card [file]="sustento()" [readonly]="soloLectura()" (replace)="panelSustentoAbierto.set(true)" (removed)="sustento.set(null)" />
+          } @else {
+            <div class="flex min-h-[49px] items-center rounded-siaf-md bg-[var(--sys-color-bg-surfaces-surface-low)] px-siaf-md py-siaf-sm">
+              <p class="m-0 text-sm text-[var(--sys-color-text-neutral-medium)]">No se han adjuntado archivos. Haga clic en el botón para subir un archivo (PDF).</p>
+            </div>
+          }
+        </div>
+      </siaf-solicitude-form-card>
+
+      <!-- ── Comentarios del aprobador y trazabilidad ── -->
+      @if (historial().length > 0 || comentarioActual()) {
+        <siaf-detail-history-tabs [comentario]="comentarioActual()" [entries]="historial()" />
+      }
+
+      @if (numeroDocumento()) {
+        <siaf-action-tracker [showSummaryCards]="true" [showTabs]="false" [summaryItems]="trazabilidad()" />
+      }
+    }
+  </siaf-solicitude-page-layout>
+
+  <siaf-upload-side-nav [open]="panelSustentoAbierto()" (closed)="panelSustentoAbierto.set(false)" (confirmed)="onSustentoConfirmado($event)" />
+
+  <siaf-request-approval-modals
+    [saveOpen]="modalGrabar()"
+    [verifyOpen]="modalVerificar()"
+    [deleteOpen]="modalEliminar()"
+    [approveOpen]="modalAprobar()"
+    [observeOpen]="modalObservar()"
+    [rejectOpen]="modalRechazar()"
+    [saving]="saving()"
+    [reason]="comentario()"
+    [rejectReasonType]="motivoRechazo()"
+    [rejectReasonTypeOptions]="motivosRechazo"
+    [snackbarVariant]="aviso()"
+    [snackbarOpen]="avisoAbierto()"
+    requestType="creación"
+    [requestNumber]="numeroDocumento()"
+    (saveConfirmed)="onConfirmarGrabar()"
+    (verifyConfirmed)="onConfirmarVerificar()"
+    (deleteConfirmed)="onConfirmarEliminar()"
+    (approveConfirmed)="onConfirmarAprobar()"
+    (observeConfirmed)="onConfirmarObservar()"
+    (rejectConfirmed)="onConfirmarRechazar()"
+    (saveClosed)="modalGrabar.set(false)"
+    (verifyClosed)="modalVerificar.set(false)"
+    (deleteClosed)="modalEliminar.set(false)"
+    (approvalClosed)="cerrarModalesAprobador()"
+    (reasonChange)="comentario.set($event)"
+    (rejectReasonTypeChange)="motivoRechazo.set($event)"
+    (snackbarClosed)="avisoAbierto.set(false)"
+  />
+</div>

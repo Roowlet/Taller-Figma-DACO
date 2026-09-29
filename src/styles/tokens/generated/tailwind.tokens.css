@@ -1,0 +1,81 @@
+/**
+ * TAILWIND TOKENS - Integración de tokens CSS con Tailwind v4
+ * Usa @theme para mapear variables CSS a utilidades de Tailwind
+ */
+
+@theme {
+  /* ========================================
+     COLORES - Mapeados para Tailwind
+     ======================================== */
+  --color-brand-primary: var(--sys-color-bg-brand-primary);
+  --color-brand-primary-hover: var(--sys-color-bg-brand-primary-hover);
+  --color-brand-secondary: var(--sys-color-bg-brand-secondary);
+  --color-brand-accent: var(--sys-color-bg-brand-accent);
+  --color-brand-contrast: var(--sys-color-text-brand-white);
+
+  --color-surface: var(--sys-color-bg-surfaces-surface);
+  --color-surface-high: var(--sys-color-bg-surfaces-surface-high);
+  --color-surface-muted: var(--sys-color-bg-surfaces-surface-muted);
+
+  --color-text: var(--sys-color-text-neutral-high);
+  --color-text-medium: var(--sys-color-text-neutral-medium);
+  --color-text-low: var(--sys-color-text-neutral-low);
+  --color-text-disabled: var(--sys-color-text-neutral-disabled);
+
+  --color-border: var(--sys-color-border-states-enabled);
+  --color-border-hover: var(--sys-color-border-states-hover);
+  --color-border-focus: var(--sys-color-border-states-focused);
+
+  --color-success: var(--sys-color-bg-feedback-success);
+  --color-warning: var(--sys-color-bg-feedback-warning);
+  --color-danger: var(--sys-color-bg-feedback-danger);
+  --color-info: var(--sys-color-bg-feedback-info);
+
+  /* ========================================
+     ESPACIADO
+     ======================================== */
+  --spacing-0: 0;
+  --spacing-1: var(--sys-space-1);
+  --spacing-2: var(--sys-space-2);
+  --spacing-3: var(--sys-space-3);
+  --spacing-4: var(--sys-space-4);
+  --spacing-5: var(--sys-space-5);
+  --spacing-6: var(--sys-space-6);
+  --spacing-8: var(--sys-space-8);
+  --spacing-10: var(--sys-space-10);
+  --spacing-12: var(--sys-space-12);
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --radius-siaf-sm: var(--sys-radius-sm);
+  --radius-siaf-md: var(--sys-radius-md);
+  --radius-siaf-lg: var(--sys-radius-lg);
+  --radius-siaf-xl: var(--sys-radius-xl);
+  --radius-siaf-full: var(--sys-radius-full);
+
+  /* ========================================
+     SOMBRAS
+     ======================================== */
+  --shadow-siaf-sm: var(--sys-shadow-sm);
+  --shadow-siaf-md: var(--sys-shadow-md);
+  --shadow-siaf-lg: var(--sys-shadow-lg);
+  --shadow-siaf-elevation-1: var(--sys-shadow-elevation-1);
+  --shadow-siaf-elevation-2: var(--sys-shadow-elevation-2);
+  --shadow-siaf-elevation-6: var(--sys-shadow-elevation-6);
+  --shadow-siaf-elevation-8: var(--sys-shadow-elevation-8);
+  --shadow-siaf-elevation-16: var(--sys-shadow-elevation-16);
+
+  /* ========================================
+     TIPOGRAFÍA
+     ======================================== */
+  --font-sans: var(--sys-typography-font-family-base);
+  --font-mono: var(--sys-typography-font-family-monospace);
+
+  /* ========================================
+     TRANSICIONES
+     ======================================== */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 350ms;
+}
