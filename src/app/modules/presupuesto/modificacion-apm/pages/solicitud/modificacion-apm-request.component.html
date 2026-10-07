@@ -51,7 +51,183 @@
         <div class="pt-siaf-md">
           @switch (tabActiva()) {
             @case ('gastos') {
-              <siaf-table [columns]="gastosColumns" [rows]="gastosRows()" />
+              @if (editandoGastos() && gastoEditado(); as g) {
+                <!-- Formulario de edición de un gasto (frame al pulsar el lápiz) -->
+                <div class="flex items-center justify-end gap-siaf-sm">
+                  <siaf-button variant="outline" size="md" (click)="cancelarEdicionGasto()">Cancelar</siaf-button>
+                  <siaf-button variant="filled" size="md" [disabled]="!edicionValida()" (click)="aceptarEdicionGasto()">Aceptar</siaf-button>
+                </div>
+
+                <h3 class="m-0 text-sm font-bold uppercase text-text">Detalle</h3>
+
+                <!-- Clasificador fuente de financiamiento -->
+                <div class="flex flex-col gap-siaf-xs">
+                  <div class="flex min-h-10 items-center justify-between gap-siaf-md">
+                    <h4 class="m-0 text-sm font-bold uppercase text-[var(--sys-color-text-neutral-high)]">Clasificador fuente de financiamiento</h4>
+                    <button type="button" class="inline-flex size-10 shrink-0 items-center justify-center rounded-siaf-md border border-[var(--sys-color-border-states-enabled)] text-[var(--sys-color-text-neutral-low)] disabled:opacity-50" aria-label="Buscar fuente de financiamiento" disabled>
+                      <siaf-icon name="search" [size]="20" />
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-siaf-md rounded-siaf-md border-l-4 border-[var(--sys-color-bg-brand-primary)] bg-[var(--sys-color-bg-surfaces-surface-low)] px-siaf-md py-siaf-sm">
+                    <div class="min-w-[130px]">
+                      <p class="m-0 text-[11px] uppercase tracking-[0.5px] text-[var(--sys-color-text-neutral-low)]">Código fuente de financiamiento</p>
+                      <p class="m-0 text-sm font-bold text-[var(--sys-color-text-neutral-high)]">{{ g.codigoFuente }}</p>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="m-0 text-[11px] uppercase tracking-[0.5px] text-[var(--sys-color-text-neutral-low)]">Nombre fuente de financiamiento</p>
+                      <p class="m-0 text-sm font-bold text-[var(--sys-color-text-neutral-high)]">{{ g.fuenteFinanciamiento }}</p>
+                    </div>
+                    <siaf-icon name="close" [size]="20" class="shrink-0 text-[var(--sys-color-text-neutral-low)]" />
+                  </div>
+                </div>
+
+                <!-- Categoría del gasto -->
+                <div class="flex flex-col gap-siaf-xs">
+                  <div class="flex min-h-10 items-center justify-between gap-siaf-md">
+                    <h4 class="m-0 text-sm font-bold uppercase text-[var(--sys-color-text-neutral-high)]">Categoría del gasto</h4>
+                    <button type="button" class="inline-flex size-10 shrink-0 items-center justify-center rounded-siaf-md border border-[var(--sys-color-border-states-enabled)] text-[var(--sys-color-text-neutral-low)] disabled:opacity-50" aria-label="Buscar categoría del gasto" disabled>
+                      <siaf-icon name="search" [size]="20" />
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-siaf-md rounded-siaf-md border-l-4 border-[var(--sys-color-bg-brand-primary)] bg-[var(--sys-color-bg-surfaces-surface-low)] px-siaf-md py-siaf-sm">
+                    <div class="min-w-[130px]">
+                      <p class="m-0 text-[11px] uppercase tracking-[0.5px] text-[var(--sys-color-text-neutral-low)]">Código categoría del gasto</p>
+                      <p class="m-0 text-sm font-bold text-[var(--sys-color-text-neutral-high)]">{{ g.codigoCategoria }}</p>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="m-0 text-[11px] uppercase tracking-[0.5px] text-[var(--sys-color-text-neutral-low)]">Nombre categoría del gasto</p>
+                      <p class="m-0 text-sm font-bold text-[var(--sys-color-text-neutral-high)]">{{ g.categoriaGasto }}</p>
+                    </div>
+                    <siaf-icon name="close" [size]="20" class="shrink-0 text-[var(--sys-color-text-neutral-low)]" />
+                  </div>
+                </div>
+
+                <!-- Clasificador objeto de gasto -->
+                <div class="flex flex-col gap-siaf-xs">
+                  <div class="flex min-h-10 items-center justify-between gap-siaf-md">
+                    <h4 class="m-0 text-sm font-bold uppercase text-[var(--sys-color-text-neutral-high)]">Clasificador objeto de gasto</h4>
+                    <button type="button" class="inline-flex size-10 shrink-0 items-center justify-center rounded-siaf-md border border-[var(--sys-color-border-states-enabled)] text-[var(--sys-color-text-neutral-low)] disabled:opacity-50" aria-label="Buscar clasificador objeto de gasto" disabled>
+                      <siaf-icon name="search" [size]="20" />
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-siaf-md rounded-siaf-md border-l-4 border-[var(--sys-color-bg-brand-primary)] bg-[var(--sys-color-bg-surfaces-surface-low)] px-siaf-md py-siaf-sm">
+                    <div class="min-w-[130px]">
+                      <p class="m-0 text-[11px] uppercase tracking-[0.5px] text-[var(--sys-color-text-neutral-low)]">Código genérica</p>
+                      <p class="m-0 text-sm font-bold text-[var(--sys-color-text-neutral-high)]">{{ g.codigoGenerica }}</p>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <p class="m-0 text-[11px] uppercase tracking-[0.5px] text-[var(--sys-color-text-neutral-low)]">Nombre genérica</p>
+                      <p class="m-0 text-sm font-bold text-[var(--sys-color-text-neutral-high)]">{{ g.generica }}</p>
+                    </div>
+                    <siaf-icon name="close" [size]="20" class="shrink-0 text-[var(--sys-color-text-neutral-low)]" />
+                  </div>
+                </div>
+
+                <!-- Asignación presupuestaria -->
+                <div class="flex flex-col gap-siaf-sm">
+                  <h4 class="m-0 text-sm font-bold uppercase text-[var(--sys-color-text-neutral-high)]">Asignación presupuestaria <span class="text-[var(--sys-color-text-brand-accent)]">*</span></h4>
+                  <div class="grid gap-siaf-md md:grid-cols-3">
+                    @for (anio of anios; track anio; let aidx = $index) {
+                      <siaf-input
+                        class="block w-full"
+                        [label]="'Año ' + anio"
+                        [required]="true"
+                        [autoSuccess]="false"
+                        [value]="montosTexto()[aidx]"
+                        (valueChange)="actualizarMontoEditado(aidx, $any($event))"
+                      />
+                    }
+                  </div>
+                </div>
+              } @else {
+              <!-- Buscador + filtro + menú -->
+              <div class="flex items-center gap-siaf-md">
+                <siaf-input
+                  class="block min-w-0 flex-1"
+                  label="Buscar"
+                  trailingIcon="search"
+                  trailingButtonLabel="Buscar"
+                  [value]="busquedaGastos()"
+                  (valueChange)="busquedaGastos.set($any($event))"
+                />
+                <button type="button" class="inline-flex size-10 shrink-0 items-center justify-center rounded-siaf-md text-[var(--sys-color-text-neutral-low)] transition hover:bg-[var(--sys-color-bg-states-light-hover)]" aria-label="Filtros">
+                  <siaf-icon name="filter_list" [size]="24" />
+                </button>
+                <button type="button" class="inline-flex size-10 shrink-0 items-center justify-center rounded-siaf-md text-[var(--sys-color-text-neutral-low)] transition hover:bg-[var(--sys-color-bg-states-light-hover)]" aria-label="Más opciones">
+                  <siaf-icon name="more_vert" [size]="24" />
+                </button>
+              </div>
+
+              <!-- Barra de acciones: seleccionar todo + editar + eliminar (solo en edición) -->
+              @if (!soloLectura()) {
+                <siaf-table-controls
+                  [checked]="todosGastosSeleccionados()"
+                  [indeterminate]="seleccionGastosIndeterminada()"
+                  [selectedCount]="cantidadSeleccionada()"
+                  [showEditAction]="true"
+                  [editDisabled]="cantidadSeleccionada() !== 1"
+                  [showDeleteAction]="true"
+                  [deleteDisabled]="true"
+                  [showMenuAction]="true"
+                  [page]="1"
+                  [pageSize]="gastos().length || 1"
+                  [totalItems]="gastos().length"
+                  [totalPages]="1"
+                  (selectionChange)="alternarTodosGastos($event)"
+                  (edit)="editarGastosSeleccionados()"
+                  (delete)="eliminarGastosSeleccionados()"
+                />
+              }
+
+              <!-- Tabla de gastos (multianual: scroll horizontal) -->
+              <div class="overflow-x-auto">
+                <table class="w-full min-w-[1180px] border-collapse text-left text-sm">
+                  <thead>
+                    <tr class="bg-[var(--sys-color-bg-surfaces-surface-high)] text-[var(--sys-color-text-neutral-high)]">
+                      <th rowspan="2" class="w-12 border-b border-[var(--sys-color-divider-default)] px-siaf-sm py-siaf-sm"></th>
+                      <th class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-xs text-center text-xs font-bold uppercase tracking-[0.02px]">Clasificador fuente de financiamiento</th>
+                      <th rowspan="2" class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-sm text-xs font-bold uppercase tracking-[0.02px]">Categoría del gasto</th>
+                      <th class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-xs text-center text-xs font-bold uppercase tracking-[0.02px]">Clasificador objeto del gasto</th>
+                      <th [attr.colspan]="anios.length" class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-xs text-center text-xs font-bold uppercase tracking-[0.02px]">Asignación presupuestaria</th>
+                    </tr>
+                    <tr class="bg-[var(--sys-color-bg-surfaces-surface-high)] text-[var(--sys-color-text-neutral-high)]">
+                      <th class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-xs text-xs font-bold uppercase tracking-[0.02px]">Fuente de financiamiento</th>
+                      <th class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-xs text-xs font-bold uppercase tracking-[0.02px]">Genérica</th>
+                      @for (anio of anios; track anio) {
+                        <th class="border-b border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-xs text-center text-xs font-bold uppercase tracking-[0.02px]">{{ anio }}</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (fila of gastosFiltrados(); track fila.indice) {
+                      <tr
+                        class="border-b border-[var(--sys-color-divider-default)]"
+                        [class.bg-[var(--sys-color-bg-states-light-selected)]]="estaSeleccionado(fila.indice)"
+                      >
+                        <td class="px-siaf-sm py-siaf-sm align-middle">
+                          <div class="flex items-center gap-siaf-xs">
+                            <siaf-checkbox [checked]="estaSeleccionado(fila.indice)" [disabled]="soloLectura()" (checkedChange)="alternarSeleccionGasto(fila.indice, $event)" />
+                            <siaf-icon name="notes" [size]="24" class="shrink-0 text-[var(--sys-color-icon-states-enabled)]" />
+                          </div>
+                        </td>
+                        <td class="px-siaf-md py-siaf-sm align-middle text-[var(--sys-color-text-neutral-high)]">{{ fila.gasto.fuenteFinanciamiento }}</td>
+                        <td class="px-siaf-md py-siaf-sm align-middle text-[var(--sys-color-text-neutral-high)]">{{ fila.gasto.categoriaGasto }}</td>
+                        <td class="px-siaf-md py-siaf-sm align-middle text-[var(--sys-color-text-neutral-high)]">{{ fila.gasto.generica }}</td>
+                        @for (anio of anios; track anio; let aidx = $index) {
+                          <td class="whitespace-nowrap border-l border-[var(--sys-color-divider-default)] px-siaf-md py-siaf-sm text-right align-middle text-[var(--sys-color-text-neutral-high)]">{{ formatearSoles(fila.gasto.montos[aidx]) }}</td>
+                        }
+                      </tr>
+                    } @empty {
+                      <tr>
+                        <td [attr.colspan]="4 + anios.length" class="px-siaf-md py-siaf-lg text-center text-[var(--sys-color-text-neutral-medium)]">No hay gastos que coincidan con la búsqueda.</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="m-0 pt-siaf-sm text-sm text-[var(--sys-color-text-neutral-medium)]">{{ gastosFiltrados().length }} de {{ gastos().length }} registro(s)</p>
+              }
             }
             @default {
               <div class="flex min-h-[120px] items-center justify-center rounded-siaf-md bg-[var(--sys-color-bg-surfaces-surface-low)] px-siaf-md py-siaf-lg">
@@ -62,7 +238,8 @@
         </div>
       </siaf-solicitude-form-card>
 
-      <!-- ── Detalle de la modificación y sustento ── -->
+      @if (!editandoGastos()) {
+      <!-- ── Detalle de la modificación y sustento (solo en el formulario principal) ── -->
       <siaf-solicitude-form-card title="Detalle de modificación">
         <text-area-control
           placeholder="Descripción"
@@ -99,6 +276,7 @@
 
       @if (numeroDocumento()) {
         <siaf-action-tracker [showSummaryCards]="true" [showTabs]="false" [summaryItems]="trazabilidad()" />
+      }
       }
     }
   </siaf-solicitude-page-layout>

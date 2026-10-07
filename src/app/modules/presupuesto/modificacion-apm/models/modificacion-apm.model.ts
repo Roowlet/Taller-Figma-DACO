@@ -10,13 +10,19 @@
 export const CODIGO_DOCUMENTO = 'SMAPM';
 export const NOMBRE_DOCUMENTO = 'Solicitud de Modificación de la APM';
 
+/** Años de la asignación presupuestaria multianual (columnas de monto de la tabla). */
+export const ANIOS_APM = [2027, 2028, 2029];
+
 /** Una línea de gasto de la APM (pestaña «Gastos» de la solicitud). */
 export interface GastoApm {
+  codigoFuente: string;
   fuenteFinanciamiento: string;
+  codigoCategoria: string;
   categoriaGasto: string;
+  codigoGenerica: string;
   generica: string;
-  /** Monto propuesto para el año, en soles. */
-  monto: number;
+  /** Montos propuestos por año, en soles (paralelo a `ANIOS_APM`). */
+  montos: number[];
 }
 
 /** Lo que el creador propone en la solicitud de modificación. */
@@ -31,14 +37,14 @@ export interface ModificacionApmDatos {
  * vigente de la entidad; en el taller son datos simulados fijos por genérica de gasto.
  */
 export const GASTOS_APM: GastoApm[] = [
-  { fuenteFinanciamiento: 'Recursos ordinarios', categoriaGasto: 'Gastos corrientes', generica: 'Personal y obligaciones sociales', monto: 183115400 },
-  { fuenteFinanciamiento: 'Recursos ordinarios', categoriaGasto: 'Gastos corrientes', generica: 'Pensiones y otras prestaciones sociales', monto: 1501030 },
-  { fuenteFinanciamiento: 'Recursos ordinarios', categoriaGasto: 'Gastos corrientes', generica: 'Bienes y servicios', monto: 165642800 },
-  { fuenteFinanciamiento: 'Recursos ordinarios', categoriaGasto: 'Gastos corrientes', generica: 'Donaciones y transferencias', monto: 147977500 },
-  { fuenteFinanciamiento: 'Recursos ordinarios', categoriaGasto: 'Gastos corrientes', generica: 'Otros gastos', monto: 374077900 },
+  { codigoFuente: '1', fuenteFinanciamiento: 'Recursos ordinarios', codigoCategoria: '5', categoriaGasto: 'Gastos corrientes', codigoGenerica: '1', generica: 'Personal y obligaciones sociales', montos: [183115348, 183313009, 184043956] },
+  { codigoFuente: '1', fuenteFinanciamiento: 'Recursos ordinarios', codigoCategoria: '5', categoriaGasto: 'Gastos corrientes', codigoGenerica: '2', generica: 'Pensiones y otras prestaciones sociales', montos: [1501030, 1501030, 1501030] },
+  { codigoFuente: '1', fuenteFinanciamiento: 'Recursos ordinarios', codigoCategoria: '5', categoriaGasto: 'Gastos corrientes', codigoGenerica: '3', generica: 'Bienes y servicios', montos: [165642053, 165642053, 165642053] },
+  { codigoFuente: '1', fuenteFinanciamiento: 'Recursos ordinarios', codigoCategoria: '5', categoriaGasto: 'Gastos corrientes', codigoGenerica: '4', generica: 'Donaciones y transferencias', montos: [147977758, 147977758, 147977758] },
+  { codigoFuente: '1', fuenteFinanciamiento: 'Recursos ordinarios', codigoCategoria: '5', categoriaGasto: 'Gastos corrientes', codigoGenerica: '5', generica: 'Otros gastos', montos: [374077456, 374077456, 374077456] },
 ];
 
-/** Formatea un monto como soles (S/ 1,234,567). */
+/** Formatea un monto como soles con dos decimales (S/ 1,234,567.00). */
 export function formatearSoles(monto: number): string {
-  return `S/ ${monto.toLocaleString('es-PE')}`;
+  return `S/ ${monto.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }

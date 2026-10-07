@@ -77,9 +77,10 @@ import { PaginationComponent } from '../pagination/pagination.component';
 
       @if (selectedCount > 0 && showDeleteAction) {
         <button
-          class="inline-flex size-10 items-center justify-center rounded-siaf-md text-text-muted transition hover:bg-surface-muted"
+          class="inline-flex size-10 items-center justify-center rounded-siaf-md text-text-muted transition hover:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-40"
           type="button"
           [attr.aria-label]="deleteLabel"
+          [disabled]="deleteDisabled"
           (click)="delete.emit()"
         >
           <siaf-icon name="delete" [size]="24" />
@@ -130,6 +131,7 @@ export class TableControlsComponent {
   @Input() showMenuAction = false;
   @Input() showSelection = true;
   @Input() editDisabled = false;
+  @Input() deleteDisabled = false;
   @Input() hideTopPaginationOnMobile = false;
   @Input() selectAllLabel = 'Seleccionar filas';
   @Input() editLabel = 'Editar fila seleccionada';

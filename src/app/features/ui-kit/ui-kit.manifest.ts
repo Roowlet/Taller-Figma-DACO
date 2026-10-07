@@ -2704,7 +2704,7 @@ export const MANIFIESTO_UI_KIT: readonly FichaComponente[] = [
       }
     ],
     "usa": [],
-    "sinUso": true
+    "sinUso": false
   },
   {
     "selector": "siaf-collapsible-card",
@@ -13230,7 +13230,7 @@ export const MANIFIESTO_UI_KIT: readonly FichaComponente[] = [
     "usa": [
       "siaf-data-table"
     ],
-    "sinUso": false
+    "sinUso": true
   },
   {
     "selector": "siaf-table-controls",
@@ -13245,6 +13245,13 @@ export const MANIFIESTO_UI_KIT: readonly FichaComponente[] = [
     "entradas": [
       {
         "nombre": "checked",
+        "tipo": "boolean",
+        "porDefecto": "false",
+        "requerida": false,
+        "descripcion": null
+      },
+      {
+        "nombre": "deleteDisabled",
         "tipo": "boolean",
         "porDefecto": "false",
         "requerida": false,
